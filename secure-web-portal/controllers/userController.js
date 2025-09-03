@@ -69,30 +69,25 @@ const authenticate = () => {
   passport.authenticate("github", { scope: ["user:email"] })
 }
 
-const callback = async () => {
-  passport.authenticate("github", {
-    failureRedirect: "/login",
-  }),
-    async (req, res) => {
-      try {
-        const user = await User.findOne({ email: req.user.email })
+const callback = async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.user.email })
 
-        jwt.sign(
-          {
-            data: user,
-          },
-          JWT_SECRET,
-          { expiresIn: JWT_EXPIRY },
-          (error, token) => {
-            if (error) throw error
-            res.redirect(`/api/bookmarks?token=${token}`)
-          }
-        )
-      } catch (error) {
-        console.error(error)
-        res.status(500).json({ message: "There was a problem logging you in." })
+    jwt.sign(
+      {
+        data: user,
+      },
+      JWT_SECRET,
+      { expiresIn: JWT_EXPIRY },
+      (error, token) => {
+        if (error) throw error
+        res.redirect(`/api/bookmarks?token=${token}`)
       }
-    }
+    )
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: "There was a problem logging you in." })
+  }
 }
 
 module.exports = { register, login, authenticate, callback }
