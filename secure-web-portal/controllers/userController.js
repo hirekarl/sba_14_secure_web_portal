@@ -65,10 +65,6 @@ const login = async (req, res) => {
   }
 }
 
-const authenticate = () => {
-  passport.authenticate("github", { scope: ["user:email"] })
-}
-
 const callback = async (req, res) => {
   try {
     const user = await User.findOne({ email: req.user.email })
