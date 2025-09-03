@@ -83,7 +83,7 @@ const callback = async () => {
           (error, token) => {
             if (error) throw error
             // I don't get this part! Is this supposed to be the callback URL from process.env.GITHUB_CALLBACK_URL?
-            res.redirect(`/api/auth?token=${token}`)
+            res.redirect(`/api/users?token=${token}`)
           }
         )
       } catch (error) {

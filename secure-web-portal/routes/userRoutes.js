@@ -6,7 +6,7 @@ const { register, login, authenticate, callback } = require("../controllers/user
 router.post("/register", register)
 router.post("/login", login)
 
-router.get("/auth/github")
-router.get("/auth/github/callback")
+router.get("/auth/github", authenticate)
+router.get("/auth/github/callback", callback)
 
 module.exports = router
