@@ -18,7 +18,7 @@ cd secure-web-portal && npm i && npm run dev
 Top-level application behavior can be found in [`./secure-web-portal/server.js`](./secure-web-portal/server.js).
 
 ### Reflection
-The OAuth flow doesn't work, and I'm struggling to understand how to begin to fix it. I don't understand how the `passport.js` config file fits into the rest of the app, and in general, I'm finding it really challenging to wrap my head around how it fits in to the authentication flow in general.
+I'm unable to test the OAuth flow because my email address in GitHub is set to private, so the app is not able to fetch it and use it in the app. I will change my settings temporarily presently and re-test.
 
 NB: In my app, the JWT is accepted as a query param, as suggested by the spec, which indicates the redirect after third-party auth should return a redirect URL with the token as a query param.
 
