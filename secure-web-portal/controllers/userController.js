@@ -85,4 +85,4 @@ const callback = async (req, res) => {
   }
 }
 
-module.exports = { register, login, authenticate, callback }
+module.exports = { register, login, callback }
