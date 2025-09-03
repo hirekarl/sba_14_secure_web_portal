@@ -20,7 +20,7 @@ Top-level application behavior can be found in [`./secure-web-portal/server.js`]
 ### Reflection
 I'm unable to test the OAuth flow because my email address in GitHub is set to private, so the app is not able to fetch it and use it in the app. I will change my settings temporarily presently and re-test.
 
-NB: In my app, the JWT is accepted as a query param, as suggested by the spec, which indicates the redirect after third-party auth should return a redirect URL with the token as a query param.
+~~NB: In my app, the JWT is accepted as a query param, as suggested by the spec, which indicates the redirect after third-party auth should return a redirect URL with the token as a query param.~~ The app should work with an authorization header or a query param now.
 
 ## Assignment
 “Innovate Inc.” is ready for the final phase of its new user portal. They need a complete, secure backend service that combines all the features you’ve been working on. This service will be the single point of entry for all users, managing their identities and their private data.

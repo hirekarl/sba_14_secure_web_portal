@@ -5,11 +5,13 @@ const Bookmark = require("../models/Bookmark")
 const { JWT_SECRET, JWT_EXPIRY } = require("./index")
 
 const authMiddleware = (req, res, next) => {
-  const token = req.query.token
+  let token = req.query.token || req.headers.authorization
 
   if (!token) {
     return res.status(401).json({ message: "Missing or invalid token." })
   }
+
+  token = token.split(" ").pop().trim()
 
   try {
     const { data } = jwt.verify(token, JWT_SECRET, { maxAge: JWT_EXPIRY })
