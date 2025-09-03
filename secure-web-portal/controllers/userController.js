@@ -21,7 +21,11 @@ const register = async (req, res) => {
         password: password,
       })
 
-      res.status(201).json(newUser)
+      const token = jwt.sign({ data: newUser }, JWT_SECRET, {
+        expiresIn: JWT_EXPIRY,
+      })
+
+      res.status(201).json({ user: newUser, token })
     }
   } catch (error) {
     console.error(error)
