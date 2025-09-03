@@ -1,5 +1,4 @@
 const jwt = require("jsonwebtoken")
-const passport = require("passport")
 
 const { JWT_SECRET, JWT_EXPIRY } = require("../utils")
 
