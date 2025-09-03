@@ -1,13 +1,13 @@
 const jwt = require("jsonwebtoken")
 
+const Bookmark = require("../models/Bookmark")
+
 const { JWT_SECRET, JWT_EXPIRY } = require("./index")
 
 const authMiddleware = (req, res, next) => {
-  let token = req.headers.authorization
+  const token = req.query.token
 
-  if (token) {
-    token = token.split(" ").pop().trim()
-  } else {
+  if (!token) {
     return res.status(401).json({ message: "Missing or invalid token." })
   }
 
@@ -22,4 +22,34 @@ const authMiddleware = (req, res, next) => {
   next()
 }
 
-module.exports = authMiddleware
+const userOwnsBookmark = async (req, res, next) => {
+  const token = req.query.token
+
+  if (!token) {
+    return res.status(401).json({ message: "Missing or invalid token." })
+  }
+
+  const bookmarkId = req.params.id
+
+  if (!bookmarkId) {
+    return res.status(400).json({ message: "Missing bookmark ID." })
+  }
+
+  const foundBookmark = await Bookmark.findById(bookmarkId)
+
+  if (!foundBookmark) {
+    return res.status(404).json({ message: "Bookmark not found." })
+  }
+
+  if (String(foundBookmark.user) !== String(req.user._id)) {
+    return res
+      .status(403)
+      .json({
+        message: "You are not authorized to access or modify this bookmark.",
+      })
+  }
+
+  next()
+}
+
+module.exports = { authMiddleware, userOwnsBookmark }

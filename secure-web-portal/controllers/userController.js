@@ -82,8 +82,7 @@ const callback = async () => {
           { expiresIn: JWT_EXPIRY },
           (error, token) => {
             if (error) throw error
-            // I don't get this part! Is this supposed to be the callback URL from process.env.GITHUB_CALLBACK_URL?
-            res.redirect(`/api/users?token=${token}`)
+            res.redirect(`/api/bookmarks?token=${token}`)
           }
         )
       } catch (error) {
