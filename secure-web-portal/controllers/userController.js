@@ -72,7 +72,6 @@ const authenticate = () => {
 const callback = async () => {
   passport.authenticate("github", {
     failureRedirect: "/login",
-    session: false,
   }),
     async (req, res) => {
       try {
